@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>विद्यार्थी साइन अप</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>विद्यार्थी साइन अप</h2>
+        <form action="../php/signup_process.php" method="post" enctype="multipart/form-data">
+            <label for="name">नाव:</label> <input type="text" name="name" id="name" placeholder="नाव" required><br>
+             <label for="class">वर्ग:</label> <input type="text" name="class" id="class" placeholder="वर्ग" required><br>
+            <label for="rollno">रोल नंबर:</label> <input type="number" name="rollno" id="rollno" placeholder="रोल नंबर" required><br>
+            <label for="division">डिव्हिजन:</label> <input type="text" name="division" id="division" placeholder="डिव्हिजन" required><br>
+             <label for="department">विभाग:</label> <input type="text" name="department" id="department" placeholder="विभाग" required><br>
+            <label for="mobile">मोबाईल नंबर:</label>  <input type="number" name="mobile" id="mobile" placeholder="मोबाईल नंबर" required><br>
+             <label for="email">ईमेल:</label> <input type="email" name="email" id="email" placeholder="ईमेल" required><br>
+             <label for="birthdate">जन्म तारीख:</label> <input type="date" name="birthdate" id="birthdate" required><br>
+            <label for="password">पासवर्ड:</label> <input type="password" name="password" id="password" placeholder="पासवर्ड" required><br>
+             <button type="button" id="capture-button">फोटो काढा</button>
+                <div id="camera-container">
+                <video id="video-feed" autoplay></video>
+                <button type="button" id="take-photo-button">फोटो घ्या</button>
+                </div>
+                <div id="captured-images"></div>
+                <input type="hidden" name="captured_images_data" id="captured_images_data">
+            <button type="submit">साइन अप</button>
+        </form>
+    </div>
+      <script src="face-api.min.js"></script>
+    <script>
+       const captureButton = document.getElementById('capture-button');
+       const cameraContainer = document.getElementById('camera-container');
+       const videoFeed = document.getElementById('video-feed');
+       const takePhotoButton = document.getElementById('take-photo-button');
+       const capturedImagesDiv = document.getElementById('captured-images');
+       const capturedImagesDataInput = document.getElementById('captured_images_data');
+       let capturedImages = [];
+        let stream;
+
+        captureButton.addEventListener('click', () => {
+            cameraContainer.style.display = 'block';
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(mediaStream) {
+                     stream= mediaStream;
+                    videoFeed.srcObject = mediaStream;
+                })
+                .catch(function(error) {
+                    console.error('Error accessing camera:', error);
+                });
+        });
+
+        takePhotoButton.addEventListener('click', () => {
+           if (capturedImages.length < 15)
+           {
+            const canvas = document.createElement('canvas');
+             canvas.width = videoFeed.videoWidth;
+                canvas.height = videoFeed.videoHeight;
+            const context = canvas.getContext('2d');
+                context.drawImage(videoFeed, 0, 0, canvas.width, canvas.height);
+                const imageData = canvas.toDataURL('image/png');
+                capturedImages.push(imageData);
+                const img = document.createElement('img');
+                 img.src = imageData;
+                 img.classList.add('captured-image');
+                capturedImagesDiv.appendChild(img);
+           } else {
+             alert("तुम्ही 15 फोटो कॅप्चर केले आहेत.");
+           }
+           capturedImagesDataInput.value = JSON.stringify(capturedImages);
+        });
+
+        Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+    ]).then(startVideo)
+
+       async function startVideo(){
+            if(stream){
+               console.log("Video Started")
+            }
+          }
+    </script>
+</body>
+</html>

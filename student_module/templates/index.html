@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शिक्षक आणि विद्यार्थी पोर्टल</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>शिक्षक आणि विद्यार्थी पोर्टल</h2>
+        <!-- <button onclick="location.href='login.html'">लॉग इन करा</button><br> -->
+        <button onclick="location.href='./student_login.html'">Student Login</button><br>
+        <button onclick="location.href='./teacher_login.html'">Teacher Login</button><br>
+        <p>नवीन आहात? साइन अप करा:</p>
+        <button onclick="location.href='./student_singup.html'">विद्यार्थी साइन अप</button>
+        <button onclick="location.href='./teacher_signup.html'">शिक्षक साइन अप</button>
+    </div>
+</body>
+</html>

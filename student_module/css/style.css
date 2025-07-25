@@ -1,0 +1,59 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+h2 {
+    margin-bottom: 20px;
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="number"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #45a049;
+}
+#camera-container {
+    margin-top: 20px;
+    display: none; /* सुरुवातीला लपवलेले */
+}
+#video-feed {
+    width: 300px;
+    height: 225px;
+    border: 1px solid #ccc;
+}
+#captured-images {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.captured-image {
+    width: 80px;
+    height: 60px;
+    margin: 5px;
+    border: 1px solid #ddd;
+}
